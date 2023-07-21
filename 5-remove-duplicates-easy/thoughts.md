@@ -125,6 +125,10 @@ return pL + 1
 
 The logic is correct until now, but I worry about the space complexity because of `comp`. Is there a way to do it with less space ?
 
+Why return pL + 1 ?
+
+- Because pL is the index of the furthest non-repeated value, pL + 1 is to convert the index to length (index 4 = 5 elements)
+
 - We know that the array is sorted, and we know that pR is always greater than pL, so...
 - If `nums[pR] <= nums[pL]`, this means `nums[pR]` is repeated and we can skip it
 
@@ -186,3 +190,10 @@ You know what? We don't even need the edge case, because if nums length is 1, pR
    1. If `nums[pR] > nums[pL]` => increment pL, swap values in indices pL & pR
    2. Increment pR
 3. Return pL + 1
+
+### Analyzing my Code
+
+- Time Complexity: O(n)
+- Space Complexity: O(1)
+
+### LeetCode Score: Beats 98.70%% Time, Beats 81.54% Memory
