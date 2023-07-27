@@ -18,5 +18,3 @@ let isValid = (s) => {
   // If the stack is not empty => return false
   return stack.length === 0;
 };
-
-console.log(isValid("(("));
