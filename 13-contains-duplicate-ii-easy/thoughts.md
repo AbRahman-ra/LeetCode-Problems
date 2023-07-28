@@ -109,4 +109,4 @@ So, instead of replacing / updating the index in the hash map. We can simply rep
 
 If the set size is greater than k => there are more than k unique values in between of 2 repeated numbers => remove the i stored. If the size is less than or equal k and the current number exists in the set => the repeated number indexes are <= k, return true
 
-### LeetCode Score Second Time: Beats 99.13% Time 🤩🤩, Beats 75.80% Space
+### LeetCode Score Second Time: Beats 99.13% Time 🤩🤩, Beats 72.18% Space
