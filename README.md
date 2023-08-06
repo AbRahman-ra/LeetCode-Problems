@@ -4,6 +4,8 @@ Your favorite average man with no CS degree. Trying his best, solving & document
 
 Note: I sometimes solve medium and hard questions on paper first. I find it more comfortable to me to write down my though process on a paper than MD files, i apologies for that. I will do my best to document all the problems as much as possible.
 
+Update: Now writing in TS ❤️❤️
+
 ## Find me on
 
 - [LeetCode](https://leetcode.com/AbRahman-ra/)
