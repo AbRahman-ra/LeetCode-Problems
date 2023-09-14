@@ -1,17 +1,13 @@
 "use strict";
 const canSum = (target, numbers, memo = {}) => {
-    if (memo[target] !== undefined)
-        return memo[target];
-    if (target === 0)
-        return true;
-    if (target < 0)
-        return false;
-    for (let number of numbers) {
-        memo[target] = canSum(target - number, numbers, memo);
-        if (memo[target])
-            return true;
-    }
-    return false;
+  if (memo[target] !== undefined) return memo[target];
+  if (target === 0) return true;
+  if (target < 0) return false;
+  for (let number of numbers) {
+    memo[target] = canSum(target - number, numbers, memo);
+    if (memo[target]) return true;
+  }
+  return false;
 };
 console.log(canSum(15, [3, 5, 10, 12]));
 console.log(canSum(7, [5, 3, 4, 7]));
