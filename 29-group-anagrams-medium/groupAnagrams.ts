@@ -4,11 +4,6 @@ function groupAnagrams(strs: string[]): string[][] {
     73, 79, 83, 89, 97, 101,
   ];
 
-  /* let products = [
-    2, 6, 15, 28, 55, 78, 119, 152, 207, 290, 341, 444, 533, 602, 705, 848,
-    1003, 1098, 1273, 1420, 1533, 1738, 1909, 2136, 2425, 2626,
-  ]; */
-
   let result: string[][] = [];
 
   let strSums: number[] = [];
