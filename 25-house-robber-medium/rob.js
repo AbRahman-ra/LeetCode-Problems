@@ -11,25 +11,54 @@
  * = maxSum(32, 23)
  * => 32
  */
+/*
+function rob(nums: number[]): number {
+  let memo: { [key: string]: number } = {};
+  function maxSum(index: number): number {
+    if (memo[index] !== undefined) return memo[index];
+    if (index >= nums.length) return 0;
+    if (index === nums.length - 1) {
+      memo[nums.length - 1] = nums[nums.length - 1];
+      return nums[nums.length - 1];
+    }
+    if (nums[index] + maxSum(index + 2) > nums[index + 1] + maxSum(index + 3)) {
+      memo[index] = nums[index] + maxSum(index + 2);
+      return nums[index] + maxSum(index + 2);
+    } else {
+      memo[index + 1] = nums[index + 1] + maxSum(index + 3);
+      return nums[index + 1] + maxSum(index + 3);
+    }
+  }
+  return maxSum(0);
+}
+*/
+// BETTER SOLUTION
 function rob(nums) {
     let memo = {};
-    function maxSum(index) {
-        if (memo[index] !== undefined)
+    function robFrom(index) {
+        if (index in memo)
             return memo[index];
-        if (index >= nums.length)
-            return 0;
-        if (index === nums.length - 1) {
-            memo[nums.length - 1] = nums[nums.length - 1];
-            return nums[nums.length - 1];
+        switch (index) {
+            case nums.length - 2:
+                memo[index] = nums[index] > nums[index + 1] ? nums[index] : nums[index + 1];
+                break;
+            case nums.length - 1:
+                memo[index] = nums[index];
+                break;
+            case nums.length:
+                memo[index] = 0;
+                break;
+            default:
+                let nextRob = robFrom(index + 2);
+                let afterNextRob = robFrom(index + 3);
+                memo[index] = nums[index] + (nextRob > afterNextRob ? nextRob : afterNextRob);
         }
-        if (nums[index] + maxSum(index + 2) > nums[index + 1] + maxSum(index + 3)) {
-            memo[index] = nums[index] + maxSum(index + 2);
-            return nums[index] + maxSum(index + 2);
-        }
-        else {
-            memo[index + 1] = nums[index + 1] + maxSum(index + 3);
-            return nums[index + 1] + maxSum(index + 3);
-        }
+        return memo[index];
     }
-    return maxSum(0);
+    let robFirst = robFrom(0);
+    let robSecond = robFrom(1);
+    return robFirst > robSecond ? robFirst : robSecond;
 }
+console.log(rob([1, 0, 8, 12, 14, 6, 9, 2])); // 32
+console.log(rob([1, 2, 3, 1])); // 4
+console.log(rob([2, 7, 9, 3, 1])); // 12

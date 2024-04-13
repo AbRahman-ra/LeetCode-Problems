@@ -11,6 +11,7 @@
  * => 32
  */
 
+/*
 function rob(nums: number[]): number {
   let memo: { [key: string]: number } = {};
   function maxSum(index: number): number {
@@ -30,3 +31,41 @@ function rob(nums: number[]): number {
   }
   return maxSum(0);
 }
+*/
+
+// BETTER SOLUTION
+
+
+function rob(nums: number[]): number {
+  let memo: {[key: number]: number} = {};
+  
+  function robFrom(index: number): number {
+    if(index in memo) return memo[index];
+  
+    switch (index) {
+      case nums.length - 2:
+        memo[index] = nums[index] > nums[index + 1] ? nums[index] : nums[index + 1];
+        break; 
+      case nums.length - 1:
+        memo[index] = nums[index];
+        break;
+      case nums.length:
+        memo[index] = 0;
+        break;
+      default:
+        let nextRob = robFrom(index + 2);
+        let afterNextRob = robFrom(index + 3);
+        memo[index] = nums[index] + (nextRob > afterNextRob ? nextRob : afterNextRob);
+      }
+    return memo[index];
+  }
+  
+  let robFirst = robFrom(0);
+  let robSecond = robFrom(1);
+  
+  return robFirst > robSecond ? robFirst : robSecond;
+}
+
+console.log(rob([1, 0, 8, 12, 14, 6, 9, 2])); // 32
+console.log(rob([1,2,3,1])); // 4
+console.log(rob([2,7,9,3,1])); // 12
