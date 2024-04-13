@@ -39,7 +39,7 @@ function rob(nums: number[]): number {
 function rob(nums: number[]): number {
   let memo: {[key: number]: number} = {};
   
-  function robFrom(index: number): number {
+  function robFrom(index = 0): number {
     if(index in memo) return memo[index];
   
     switch (index) {
@@ -53,19 +53,18 @@ function rob(nums: number[]): number {
         memo[index] = 0;
         break;
       default:
-        let nextRob = robFrom(index + 2);
-        let afterNextRob = robFrom(index + 3);
+        let nextRob = robFrom(index + 2); // robFrom(0)
+        let afterNextRob = robFrom(index + 3); // robFrom(1)
+        if (index === -2) nums[index] = 0;
         memo[index] = nums[index] + (nextRob > afterNextRob ? nextRob : afterNextRob);
       }
     return memo[index];
   }
   
-  let robFirst = robFrom(0);
-  let robSecond = robFrom(1);
-  
-  return robFirst > robSecond ? robFirst : robSecond;
+  return robFrom(-2);
 }
 
 console.log(rob([1, 0, 8, 12, 14, 6, 9, 2])); // 32
 console.log(rob([1,2,3,1])); // 4
 console.log(rob([2,7,9,3,1])); // 12
+console.log(rob([4,1,2,7,5,3,1])); // 14
